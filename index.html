@@ -8,89 +8,70 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f2f5;min-height:100vh;padding:24px}
-
-/* ── 검색 UI ── */
-.page-title{text-align:center;font-size:22px;font-weight:700;color:#222;margin-bottom:6px}
+.page-title{text-align:center;font-size:22px;font-weight:600;color:#222;margin-bottom:6px}
 .page-sub{text-align:center;font-size:13px;color:#888;margin-bottom:20px}
-.search-wrap{display:flex;gap:8px;max-width:480px;margin:0 auto 28px;flex-wrap:wrap;justify-content:center}
-.search-input{flex:1;min-width:200px;padding:10px 14px;border:1.5px solid #ddd;border-radius:10px;font-size:14px;outline:none;background:#fff}
+.search-wrap{display:flex;gap:8px;max-width:480px;margin:0 auto 16px;flex-wrap:wrap;justify-content:center}
+.search-input{flex:1;min-width:180px;padding:10px 14px;border:1.5px solid #ddd;border-radius:10px;font-size:14px;outline:none;background:#fff}
 .search-input:focus{border-color:#378ADD}
 .search-btn{padding:10px 20px;background:#378ADD;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
 .search-btn:hover{background:#185FA5}
-.quick-wrap{display:flex;flex-wrap:wrap;gap:6px;max-width:680px;margin:0 auto 28px;justify-content:center}
+.quick-wrap{display:flex;flex-wrap:wrap;gap:6px;max-width:680px;margin:0 auto 24px;justify-content:center}
 .quick-btn{padding:4px 10px;border:1px solid #ccc;border-radius:14px;background:#fff;font-size:11px;color:#555;cursor:pointer}
 .quick-btn:hover{background:#e8f0fb;border-color:#378ADD;color:#185FA5}
+.preview-wrap{display:flex;justify-content:center;align-items:flex-start;gap:16px;margin-bottom:24px}
+.card-and-btns{display:flex;align-items:flex-start;gap:16px}
+.side-btns{display:flex;flex-direction:column;gap:10px;padding-top:8px;flex-shrink:0}
+.empty-state{text-align:center;padding:48px 24px;color:#bbb;font-size:14px}
+.empty-icon{font-size:48px;margin-bottom:12px}
 
-/* ── 카드 미리보기 영역 ── */
-.preview-wrap{display:flex;justify-content:center;margin-bottom:24px}
-
-/* ── 카드 본체 (이미지로 캡처되는 영역) ── */
-.el-card{
-  width:340px;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 8px 32px rgba(0,0,0,0.18);
-  background:#fff;
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-}
-.card-header{
-  padding:28px 28px 20px;
-  position:relative;
-  display:flex;
-  align-items:flex-end;
-  gap:16px;
-}
-.card-num{
-  position:absolute;top:16px;left:20px;
-  font-size:13px;font-weight:600;color:rgba(0,0,0,0.4);
-}
-.card-sym{
-  font-size:72px;font-weight:800;line-height:1;color:rgba(0,0,0,0.82);
-  letter-spacing:-2px;
-}
-.card-info{display:flex;flex-direction:column;gap:3px;padding-bottom:6px}
+/* ── 카드 ── */
+.el-card{width:360px;border-radius:20px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.15);background:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+.card-header{padding:26px 24px 18px;position:relative;display:flex;align-items:flex-end;gap:14px}
+.card-num{position:absolute;top:14px;left:18px;font-size:12px;font-weight:600;color:rgba(0,0,0,0.4)}
+.card-sym{font-size:68px;font-weight:800;line-height:1;color:rgba(0,0,0,0.82);letter-spacing:-2px}
+.card-info-top{display:flex;flex-direction:column;gap:3px;padding-bottom:5px}
 .card-name{font-size:20px;font-weight:700;color:rgba(0,0,0,0.8)}
-.card-cat{font-size:12px;font-weight:500;color:rgba(0,0,0,0.45);margin-top:2px}
-.card-mass{font-size:13px;color:rgba(0,0,0,0.55)}
+.card-cat-line{font-size:11px;color:rgba(0,0,0,0.45);margin-top:2px}
+.card-mass-line{font-size:12px;color:rgba(0,0,0,0.55)}
 
-.card-body{background:#fff;padding:20px 24px 24px;display:flex;flex-direction:column;gap:14px}
+.card-body{background:#fff;padding:18px 22px 22px;display:flex;flex-direction:column;gap:14px}
 
-.card-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .stat-box{background:#f6f7f9;border-radius:10px;padding:10px 12px}
 .stat-lbl{font-size:10px;color:#999;font-weight:500;margin-bottom:2px}
-.stat-val{font-size:15px;font-weight:700;color:#222}
+.stat-val{font-size:14px;font-weight:700;color:#222}
 
 .card-divider{height:1px;background:#f0f0f0}
 
-.card-info-rows{display:flex;flex-direction:column;gap:8px}
+.card-info-rows{display:flex;flex-direction:column;gap:7px}
 .card-info-row{display:flex;gap:10px}
 .ci-label{font-size:11px;font-weight:600;color:#aaa;min-width:36px;padding-top:1px;flex-shrink:0}
 .ci-val{font-size:12px;color:#444;line-height:1.45}
 
-.card-atom{display:flex;flex-direction:column;align-items:center;gap:8px}
-.card-atom-title{font-size:11px;font-weight:600;color:#aaa;align-self:flex-start}
-.card-canvas-wrap{display:flex;gap:12px;align-items:center;width:100%}
-.card-shells{display:flex;flex-direction:column;gap:4px;flex:1}
+.card-atom{display:flex;flex-direction:column;gap:8px}
+.card-atom-title{font-size:11px;font-weight:600;color:#aaa}
+.card-canvas-wrap{display:flex;gap:12px;align-items:center}
+.card-shells{display:flex;flex-direction:column;gap:5px;flex:1}
 .shell-row{display:flex;align-items:center;gap:6px}
 .shell-lbl{font-size:10px;font-weight:600;color:#aaa;min-width:14px}
-.shell-bar-bg{flex:1;height:8px;background:#eef1ff;border-radius:4px;overflow:hidden}
-.shell-bar{height:100%;border-radius:4px;background:#378ADD}
-.shell-cnt{font-size:10px;color:#666;min-width:20px;text-align:right}
+.shell-bar-bg{flex:1;height:7px;background:#eef1ff;border-radius:4px;overflow:hidden}
+.shell-bar{height:100%;border-radius:4px}
+.shell-cnt{font-size:10px;color:#666;min-width:22px;text-align:right}
 
-.card-footer{background:#f6f7f9;padding:12px 24px;display:flex;justify-content:space-between;align-items:center}
+.e-chip-wrap{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.e-chip{background:#fff;border:1px solid #ccd6f0;border-radius:5px;padding:2px 6px;font-size:10px;color:#334}
+.e-total{font-size:10px;color:#999;margin-top:4px}
+
+.card-footer{background:#f6f7f9;padding:11px 22px;display:flex;justify-content:space-between;align-items:center}
 .footer-disc{font-size:10px;color:#aaa}
 .footer-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px;color:rgba(0,0,0,0.5)}
 
-/* ── 다운로드 버튼 ── */
-.btn-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.dl-btn{padding:11px 28px;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s}
+.btn-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.dl-btn{padding:10px 16px;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;width:100%}
 .dl-btn.primary{background:#378ADD;color:#fff}
 .dl-btn.primary:hover{background:#185FA5}
 .dl-btn.secondary{background:#fff;color:#444;border:1.5px solid #ddd}
 .dl-btn.secondary:hover{background:#f5f5f5}
-
-.empty-state{text-align:center;padding:48px 24px;color:#bbb;font-size:14px}
-.empty-icon{font-size:48px;margin-bottom:12px}
 </style>
 </head>
 <body>
@@ -102,7 +83,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <input class="search-input" id="search-input" type="text" placeholder="예: 수소, H, 1, 금, Au, 79…" />
   <button class="search-btn" onclick="doSearch()">검색</button>
 </div>
-
 <div class="quick-wrap" id="quick-wrap"></div>
 
 <div class="preview-wrap">
@@ -112,15 +92,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       원소를 검색하면 카드 미리보기가 나타납니다
     </div>
   </div>
-</div>
-
-<div class="btn-row" id="btn-row" style="display:none">
-  <button class="dl-btn secondary" onclick="copyCard()">클립보드에 복사</button>
-  <button class="dl-btn primary" onclick="downloadCard()">PNG로 저장</button>
+  <div class="side-btns" id="side-btns" style="display:none">
+    <button class="dl-btn secondary" onclick="copyCard()">클립보드에 복사</button>
+    <button class="dl-btn primary" onclick="downloadCard()">PNG로 저장</button>
+  </div>
 </div>
 
 <script>
-const ELEMENTS = [
+const ALL_ELS=[
   {sym:"H",name:"수소",num:1,mass:1.008,period:1,group:1,cat:"nonmetal",e:[1],desc:"가장 간단한 원소로, 우주에서 가장 풍부한 원소입니다.",uses:"연료전지, 암모니아 합성, 수소화 반응",disc:"1766년 헨리 캐번디시"},
   {sym:"He",name:"헬륨",num:2,mass:4.003,period:1,group:18,cat:"nonmetal",e:[2],desc:"불활성 기체로, 공기보다 가벼워 풍선에 사용됩니다.",uses:"풍선, 저온냉각, 호흡용 기체 혼합물",disc:"1868년 피에르 장센"},
   {sym:"Li",name:"리튬",num:3,mass:6.94,period:2,group:1,cat:"metal",e:[2,1],desc:"가장 가벼운 금속으로, 배터리에 널리 사용됩니다.",uses:"리튬 배터리, 정신과 약물, 합금",disc:"1817년 요한 아르페드손"},
@@ -129,7 +108,7 @@ const ELEMENTS = [
   {sym:"C",name:"탄소",num:6,mass:12.01,period:2,group:14,cat:"nonmetal",e:[2,4],desc:"생명체의 기본 구성 요소이며 다이아몬드와 흑연의 성분입니다.",uses:"플라스틱, 강철, 다이아몬드, 연료",disc:"고대부터 알려짐"},
   {sym:"N",name:"질소",num:7,mass:14.01,period:2,group:15,cat:"nonmetal",e:[2,5],desc:"대기의 78%를 차지하며, 단백질과 DNA의 구성요소입니다.",uses:"비료, 폭발물, 액체질소 냉각",disc:"1772년 다니엘 러더퍼드"},
   {sym:"O",name:"산소",num:8,mass:16.00,period:2,group:16,cat:"nonmetal",e:[2,6],desc:"생명 유지에 필수적이며, 연소와 호흡에 관여합니다.",uses:"호흡, 연소, 의료용 산소, 로켓 연료",disc:"1774년 조제프 프리스틀리"},
-  {sym:"F",name:"플루오린",num:9,mass:19.00,period:2,group:17,cat:"nonmetal",e:[2,7],desc:"가장 반응성이 높은 원소로, 원소 자체는 독성이 강하며 불화나트륨 등 화합물 형태로 치약에 사용됩니다.",uses:"치약(불화물 형태), 테프론, 냉매, 우라늄 농축",disc:"1886년 앙리 무아상"},
+  {sym:"F",name:"플루오린",num:9,mass:19.00,period:2,group:17,cat:"nonmetal",e:[2,7],desc:"가장 반응성이 높은 원소로, 화합물 형태로 치약 등에 사용됩니다.",uses:"치약(불화물), 테프론, 냉매, 우라늄 농축",disc:"1886년 앙리 무아상"},
   {sym:"Ne",name:"네온",num:10,mass:20.18,period:2,group:18,cat:"nonmetal",e:[2,8],desc:"불활성 기체로, 네온사인의 주황빛을 만들어냅니다.",uses:"네온사인, 레이저, 저온냉각",disc:"1898년 윌리엄 램지"},
   {sym:"Na",name:"나트륨",num:11,mass:22.99,period:3,group:1,cat:"metal",e:[2,8,1],desc:"소금의 구성 성분으로, 생체 내 전해질 균형에 중요합니다.",uses:"소금, 비누, 가로등(나트륨등)",disc:"1807년 험프리 데이비"},
   {sym:"Mg",name:"마그네슘",num:12,mass:24.31,period:3,group:2,cat:"metal",e:[2,8,2],desc:"가벼우면서도 강한 금속으로, 합금 제조에 널리 사용됩니다.",uses:"항공기 부품, 자동차 휠, 플래시 촬영",disc:"1755년 조제프 블랙"},
@@ -181,17 +160,9 @@ const ELEMENTS = [
   {sym:"Ce",name:"세륨",num:58,mass:140.12,period:6,group:3,cat:"metal",e:[2,8,18,19,9,2],desc:"가장 풍부한 희토류 원소입니다.",uses:"촉매 변환기, 연마재",disc:"1803년 마르틴 클라프로트"},
   {sym:"Pr",name:"프라세오디뮴",num:59,mass:140.91,period:6,group:3,cat:"metal",e:[2,8,18,21,8,2],desc:"녹황색 화합물을 만드는 희토류 원소입니다.",uses:"자석, 유리 착색",disc:"1885년 칼 아우어"},
   {sym:"Nd",name:"네오디뮴",num:60,mass:144.24,period:6,group:3,cat:"metal",e:[2,8,18,22,8,2],desc:"강력한 자석을 만드는데 사용됩니다.",uses:"네오디뮴 자석, 레이저",disc:"1885년 칼 아우어"},
-  {sym:"Pm",name:"프로메튬",num:61,mass:145.00,period:6,group:3,cat:"metal",e:[2,8,18,23,8,2],desc:"방사성 인공 원소입니다.",uses:"발광 페인트, 원자 배터리",disc:"1945년 제이컵 마린스키"},
   {sym:"Sm",name:"사마륨",num:62,mass:150.36,period:6,group:3,cat:"metal",e:[2,8,18,24,8,2],desc:"강력한 영구 자석을 만듭니다.",uses:"사마륨 자석, 핵반응로",disc:"1879년 폴 보아보드랑"},
   {sym:"Eu",name:"유로퓸",num:63,mass:151.96,period:6,group:3,cat:"metal",e:[2,8,18,25,8,2],desc:"형광등의 적색 발광에 사용됩니다.",uses:"형광등, TV 브라운관",disc:"1901년 외젠 데마르세"},
   {sym:"Gd",name:"가돌리늄",num:64,mass:157.25,period:6,group:3,cat:"metal",e:[2,8,18,25,9,2],desc:"MRI 조영제로 사용됩니다.",uses:"MRI 조영제, 자기냉각",disc:"1880년 장 드 마리냐크"},
-  {sym:"Tb",name:"터븀",num:65,mass:158.93,period:6,group:3,cat:"metal",e:[2,8,18,27,8,2],desc:"녹색 형광을 내는 희토류입니다.",uses:"형광등, 자기광학장치",disc:"1843년 칼 모산더"},
-  {sym:"Dy",name:"디스프로슘",num:66,mass:162.50,period:6,group:3,cat:"metal",e:[2,8,18,28,8,2],desc:"레이저와 자석에 사용됩니다.",uses:"레이저, 원자로 제어봉",disc:"1886년 폴 보아보드랑"},
-  {sym:"Ho",name:"홀뮴",num:67,mass:164.93,period:6,group:3,cat:"metal",e:[2,8,18,29,8,2],desc:"가장 강한 자기적 성질을 가진 원소입니다.",uses:"레이저, 자석",disc:"1878년 마르크 들라폰텐"},
-  {sym:"Er",name:"어븀",num:68,mass:167.26,period:6,group:3,cat:"metal",e:[2,8,18,30,8,2],desc:"광섬유 증폭기에 사용됩니다.",uses:"광섬유, 레이저",disc:"1843년 칼 모산더"},
-  {sym:"Tm",name:"툴륨",num:69,mass:168.93,period:6,group:3,cat:"metal",e:[2,8,18,31,8,2],desc:"가장 희귀한 란타넘족 원소입니다.",uses:"휴대용 X선기기, 레이저",disc:"1879년 페르 클레베"},
-  {sym:"Yb",name:"이터븀",num:70,mass:173.05,period:6,group:3,cat:"metal",e:[2,8,18,32,8,2],desc:"원자시계에 사용되는 희토류입니다.",uses:"원자시계, 스테인리스강",disc:"1878년 장 드 마리냐크"},
-  {sym:"Lu",name:"루테튬",num:71,mass:174.97,period:6,group:3,cat:"metal",e:[2,8,18,32,9,2],desc:"란타넘족의 마지막 원소입니다.",uses:"석유 정제 촉매",disc:"1907년 조르주 위르벵"},
   {sym:"Hf",name:"하프늄",num:72,mass:178.49,period:6,group:4,cat:"metal",e:[2,8,18,32,10,2],desc:"핵반응로 제어봉에 사용됩니다.",uses:"핵반응로 제어봉, 합금",disc:"1923년 디르크 코스터"},
   {sym:"Ta",name:"탄탈럼",num:73,mass:180.95,period:6,group:5,cat:"metal",e:[2,8,18,32,11,2],desc:"내식성과 생체 적합성이 뛰어납니다.",uses:"콘덴서, 임플란트",disc:"1802년 안데르스 에케베리"},
   {sym:"W",name:"텅스텐",num:74,mass:183.84,period:6,group:6,cat:"metal",e:[2,8,18,32,12,2],desc:"녹는점이 가장 높은 금속입니다.",uses:"전구 필라멘트, 공구",disc:"1783년 후안 엘루야르"},
@@ -211,109 +182,74 @@ const ELEMENTS = [
   {sym:"Ra",name:"라듐",num:88,mass:226.00,period:7,group:2,cat:"metal",e:[2,8,18,32,18,8,2],desc:"강한 방사능을 내는 알칼리 토금속입니다.",uses:"암 치료(역사적)",disc:"1898년 마리 퀴리"},
   {sym:"Ac",name:"악티늄",num:89,mass:227.00,period:7,group:3,cat:"metal",e:[2,8,18,32,18,9,2],desc:"악티늄족의 첫 번째 원소입니다.",uses:"중성자원, 암 치료",disc:"1899년 앙드레 드비에른"},
   {sym:"Th",name:"토륨",num:90,mass:232.04,period:7,group:3,cat:"metal",e:[2,8,18,32,18,10,2],desc:"핵연료로 사용될 수 있는 방사성 원소입니다.",uses:"핵연료, 용접봉",disc:"1829년 옌스 베르셀리우스"},
-  {sym:"Pa",name:"프로탁티늄",num:91,mass:231.04,period:7,group:3,cat:"metal",e:[2,8,18,32,20,9,2],desc:"매우 희귀한 방사성 원소입니다.",uses:"과학 연구",disc:"1913년 카지미에시 파얀스"},
   {sym:"U",name:"우라늄",num:92,mass:238.03,period:7,group:3,cat:"metal",e:[2,8,18,32,21,9,2],desc:"핵분열과 핵무기에 사용되는 원소입니다.",uses:"핵연료, 핵무기",disc:"1789년 마르틴 클라프로트"},
-  {sym:"Np",name:"넵투늄",num:93,mass:237.00,period:7,group:3,cat:"metal",e:[2,8,18,32,22,9,2],desc:"최초의 초우라늄 원소입니다.",uses:"중성자 탐지기",disc:"1940년 에드윈 맥밀런"},
   {sym:"Pu",name:"플루토늄",num:94,mass:244.00,period:7,group:3,cat:"metal",e:[2,8,18,32,24,8,2],desc:"핵무기와 원자로에 사용됩니다.",uses:"핵무기, 원자로 연료",disc:"1940년 글렌 시보그"},
   {sym:"Am",name:"아메리슘",num:95,mass:243.00,period:7,group:3,cat:"metal",e:[2,8,18,32,25,8,2],desc:"연기 감지기에 사용됩니다.",uses:"연기 감지기",disc:"1944년 글렌 시보그"},
-  {sym:"Cm",name:"퀴륨",num:96,mass:247.00,period:7,group:3,cat:"metal",e:[2,8,18,32,25,9,2],desc:"마리 퀴리의 이름을 딴 원소입니다.",uses:"우주 탐사선 전원",disc:"1944년 글렌 시보그"},
-  {sym:"Bk",name:"버클륨",num:97,mass:247.00,period:7,group:3,cat:"metal",e:[2,8,18,32,27,8,2],desc:"버클리에서 발견된 합성 원소입니다.",uses:"과학 연구",disc:"1949년 글렌 시보그"},
-  {sym:"Cf",name:"캘리포늄",num:98,mass:251.00,period:7,group:3,cat:"metal",e:[2,8,18,32,28,8,2],desc:"중성자원으로 사용됩니다.",uses:"암 치료, 중성자원",disc:"1950년 글렌 시보그"},
-  {sym:"Es",name:"아인슈타이늄",num:99,mass:252.00,period:7,group:3,cat:"metal",e:[2,8,18,32,29,8,2],desc:"수소폭탄 실험에서 발견되었습니다.",uses:"과학 연구",disc:"1952년 알버트 기오르소"},
-  {sym:"Fm",name:"페르뮴",num:100,mass:257.00,period:7,group:3,cat:"metal",e:[2,8,18,32,30,8,2],desc:"엔리코 페르미의 이름을 딴 원소입니다.",uses:"과학 연구",disc:"1952년 알버트 기오르소"},
-  {sym:"Md",name:"멘델레븀",num:101,mass:258.00,period:7,group:3,cat:"metal",e:[2,8,18,32,31,8,2],desc:"멘델레예프의 이름을 딴 원소입니다.",uses:"과학 연구",disc:"1955년 알버트 기오르소"},
-  {sym:"No",name:"노벨륨",num:102,mass:259.00,period:7,group:3,cat:"metal",e:[2,8,18,32,32,8,2],desc:"알프레드 노벨의 이름을 딴 원소입니다.",uses:"과학 연구",disc:"1958년 알버트 기오르소"},
-  {sym:"Lr",name:"로렌슘",num:103,mass:262.00,period:7,group:3,cat:"metal",e:[2,8,18,32,32,9,2],desc:"악티늄족의 마지막 원소입니다.",uses:"과학 연구",disc:"1961년 알버트 기오르소"},
-  {sym:"Rf",name:"러더포듐",num:104,mass:267.00,period:7,group:4,cat:"metal",e:[2,8,18,32,32,10,2],desc:"최초의 초악티늄 원소로, 러더퍼드의 이름을 딴 합성 원소입니다.",uses:"과학 연구",disc:"1964년 두브나 연구소"},
-  {sym:"Db",name:"더브늄",num:105,mass:270.00,period:7,group:5,cat:"metal",e:[2,8,18,32,32,11,2],desc:"러시아 두브나에서 이름을 딴 합성 원소입니다.",uses:"과학 연구",disc:"1967년 두브나 연구소"},
-  {sym:"Sg",name:"시보귬",num:106,mass:269.00,period:7,group:6,cat:"metal",e:[2,8,18,32,32,12,2],desc:"글렌 시보그의 이름을 딴 합성 원소입니다.",uses:"과학 연구",disc:"1974년 글렌 시보그"},
-  {sym:"Bh",name:"보륨",num:107,mass:270.00,period:7,group:7,cat:"metal",e:[2,8,18,32,32,13,2],desc:"닐스 보어의 이름을 딴 합성 원소입니다.",uses:"과학 연구",disc:"1981년 GSI 연구소"},
-  {sym:"Hs",name:"하슘",num:108,mass:270.00,period:7,group:8,cat:"metal",e:[2,8,18,32,32,14,2],desc:"독일 헤센주의 이름을 딴 합성 원소입니다.",uses:"과학 연구",disc:"1984년 GSI 연구소"},
-  {sym:"Mt",name:"마이트너륨",num:109,mass:278.00,period:7,group:9,cat:"metal",e:[2,8,18,32,32,15,2],desc:"리제 마이트너의 이름을 딴 합성 원소입니다.",uses:"과학 연구",disc:"1982년 GSI 연구소"},
-  {sym:"Ds",name:"다름슈타튬",num:110,mass:281.00,period:7,group:10,cat:"metal",e:[2,8,18,32,32,16,2],desc:"독일 다름슈타트에서 이름을 딴 합성 원소입니다.",uses:"과학 연구",disc:"1994년 GSI 연구소"},
-  {sym:"Rg",name:"뢴트게늄",num:111,mass:281.00,period:7,group:11,cat:"metal",e:[2,8,18,32,32,17,2],desc:"빌헬름 뢴트겐의 이름을 딴 합성 원소입니다.",uses:"과학 연구",disc:"1994년 GSI 연구소"},
-  {sym:"Cn",name:"코페르니슘",num:112,mass:285.00,period:7,group:12,cat:"metal",e:[2,8,18,32,32,18,2],desc:"코페르니쿠스의 이름을 딴 합성 원소입니다.",uses:"과학 연구",disc:"1996년 GSI 연구소"},
-  {sym:"Nh",name:"니호늄",num:113,mass:286.00,period:7,group:13,cat:"metal",e:[2,8,18,32,32,18,3],desc:"일본(니혼)의 이름을 딴 최초의 아시아 발견 원소입니다.",uses:"과학 연구",disc:"2004년 RIKEN 연구소"},
-  {sym:"Fl",name:"플레로븀",num:114,mass:289.00,period:7,group:14,cat:"metal",e:[2,8,18,32,32,18,4],desc:"러시아 플레로프 핵반응 연구소의 이름을 딴 원소입니다.",uses:"과학 연구",disc:"1998년 두브나 연구소"},
-  {sym:"Mc",name:"모스코븀",num:115,mass:289.00,period:7,group:15,cat:"metal",e:[2,8,18,32,32,18,5],desc:"러시아 모스크바의 이름을 딴 합성 원소입니다.",uses:"과학 연구",disc:"2003년 두브나 연구소"},
-  {sym:"Lv",name:"리버모륨",num:116,mass:293.00,period:7,group:16,cat:"metal",e:[2,8,18,32,32,18,6],desc:"미국 리버모어 국립연구소의 이름을 딴 원소입니다.",uses:"과학 연구",disc:"2000년 두브나 연구소"},
-  {sym:"Ts",name:"테네신",num:117,mass:293.00,period:7,group:17,cat:"nonmetal",e:[2,8,18,32,32,18,7],desc:"미국 테네시주의 이름을 딴 합성 원소입니다.",uses:"과학 연구",disc:"2010년 두브나 연구소"},
-  {sym:"Og",name:"오가네손",num:118,mass:294.00,period:7,group:18,cat:"nonmetal",e:[2,8,18,32,32,18,8],desc:"유리 오가네시안의 이름을 딴 현재까지 발견된 가장 무거운 원소입니다.",uses:"과학 연구",disc:"2002년 두브나 연구소"},
+  {sym:"Og",name:"오가네손",num:118,mass:294.00,period:7,group:18,cat:"nonmetal",e:[2,8,18,32,32,18,8],desc:"현재까지 발견된 가장 무거운 원소입니다.",uses:"과학 연구",disc:"2002년 두브나 연구소"},
 ];
 
-const CAT_COLORS = {metal:"#85B7EB", metalloid:"#C0DD97", nonmetal:"#FAC775"};
-const CAT_NAMES  = {metal:"금속", metalloid:"준금속", nonmetal:"비금속"};
-const SHELLS     = ['K','L','M','N','O','P','Q'];
-const MAX_SHELL  = {K:2,L:8,M:18,N:32,O:32,P:9,Q:2};
+const CAT_COLORS={metal:"#85B7EB",metalloid:"#C0DD97",nonmetal:"#FAC775"};
+const CAT_NAMES={metal:"금속",metalloid:"준금속",nonmetal:"비금속"};
+const SHELLS=['K','L','M','N','O','P','Q'];
+const MAX_SHELL={K:2,L:8,M:18,N:32,O:32,P:9,Q:2};
+let currentEl=null;
 
-let currentEl = null;
-
-// 자주 찾는 원소 퀵버튼
-const QUICK = [1,6,8,26,29,79,47,78,92,1,2,11,17];
-const quickUniq = [...new Set(QUICK)].slice(0,12);
-const qw = document.getElementById('quick-wrap');
-[1,6,8,11,26,29,47,79,78,92,14,1].forEach(n => {
-  const el = ELEMENTS.find(e => e.num === n);
-  if (!el) return;
-  const b = document.createElement('button');
-  b.className = 'quick-btn';
-  b.textContent = el.sym + ' ' + el.name;
-  b.onclick = () => { renderCard(el); };
+// 퀵버튼
+const QUICK_NUMS=[1,6,8,11,26,29,47,79,78,92,14,2];
+const qw=document.getElementById('quick-wrap');
+QUICK_NUMS.forEach(n=>{
+  const el=ALL_ELS.find(e=>e.num===n);
+  if(!el)return;
+  const b=document.createElement('button');
+  b.className='quick-btn';
+  b.textContent=el.sym+' '+el.name;
+  b.onclick=()=>renderCard(el);
   qw.appendChild(b);
 });
 
-document.getElementById('search-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') doSearch();
-});
+document.getElementById('search-input').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
 
-function doSearch() {
-  const q = document.getElementById('search-input').value.trim().toLowerCase();
-  if (!q) return;
-  const el = ELEMENTS.find(e =>
-    e.name === q ||
-    e.sym.toLowerCase() === q ||
-    String(e.num) === q ||
-    e.name.includes(q)
+function doSearch(){
+  const q=document.getElementById('search-input').value.trim().toLowerCase();
+  if(!q)return;
+  const el=ALL_ELS.find(e=>
+    e.name===q||e.sym.toLowerCase()===q||String(e.num)===q||e.name.includes(q)||e.sym.toLowerCase().includes(q)
   );
-  if (el) {
-    renderCard(el);
-  } else {
-    document.getElementById('preview-area').innerHTML =
-      `<div class="empty-state"><div class="empty-icon">🔍</div>"${q}"에 해당하는 원소를 찾을 수 없습니다</div>`;
-    document.getElementById('btn-row').style.display = 'none';
-    currentEl = null;
+  if(el){renderCard(el);}
+  else{
+    document.getElementById('preview-area').innerHTML=`<div class="empty-state"><div class="empty-icon">🔍</div>"${q}"에 해당하는 원소를 찾을 수 없습니다</div>`;
+    document.getElementById('side-btns').style.display='none';
+    currentEl=null;
   }
 }
 
-function getColor(el) { return CAT_COLORS[el.cat] || '#ccc'; }
+function getColor(el){return CAT_COLORS[el.cat]||'#ccc';}
 
-function drawAtomCanvas(el, size) {
-  const canvas = document.createElement('canvas');
-  canvas.width = size; canvas.height = size;
-  const ctx = canvas.getContext('2d');
-  const cx = size/2, cy = size/2;
-  const maxR = cx - 6;
-  const step = el.e.length > 0 ? maxR / (el.e.length + 0.5) : 20;
-  const nucR = Math.min(12, step * 0.5);
-
-  ctx.beginPath(); ctx.arc(cx,cy,nucR,0,Math.PI*2);
-  ctx.fillStyle='#E24B4A'; ctx.fill();
-  const total = el.e.reduce((a,b)=>a+b,0);
+function drawAtomCanvas(el,size){
+  const canvas=document.createElement('canvas');
+  canvas.width=size;canvas.height=size;
+  const ctx=canvas.getContext('2d');
+  const cx=size/2,cy=size/2;
+  const maxR=cx-6;
+  const step=el.e.length>0?maxR/(el.e.length+0.5):20;
+  const nucR=Math.min(12,step*0.5);
+  ctx.beginPath();ctx.arc(cx,cy,nucR,0,Math.PI*2);
+  ctx.fillStyle='#E24B4A';ctx.fill();
+  const total=el.e.reduce((a,b)=>a+b,0);
   ctx.fillStyle='white';
   ctx.font=`bold ${Math.min(10,nucR*0.85)}px sans-serif`;
-  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.textAlign='center';ctx.textBaseline='middle';
   ctx.fillText(total+'+',cx,cy);
-
   el.e.forEach((cnt,si)=>{
     const r=step*(si+1);
-    ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2);
-    ctx.strokeStyle='#378ADD'; ctx.lineWidth=1; ctx.stroke();
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.strokeStyle='#378ADD';ctx.lineWidth=1;ctx.stroke();
     const eR=Math.min(4,step*0.18);
     for(let i=0;i<cnt;i++){
       const angle=(2*Math.PI*i)/cnt-Math.PI/2;
-      const ex=cx+r*Math.cos(angle), ey=cy+r*Math.sin(angle);
-      ctx.beginPath(); ctx.arc(ex,ey,eR,0,Math.PI*2);
-      ctx.fillStyle='#185FA5'; ctx.fill();
+      const ex=cx+r*Math.cos(angle),ey=cy+r*Math.sin(angle);
+      ctx.beginPath();ctx.arc(ex,ey,eR,0,Math.PI*2);
+      ctx.fillStyle='#185FA5';ctx.fill();
       ctx.fillStyle='white';
       ctx.font=`bold ${Math.max(5,eR*1.4)}px sans-serif`;
       ctx.fillText('−',ex,ey+0.5);
@@ -322,45 +258,50 @@ function drawAtomCanvas(el, size) {
   return canvas;
 }
 
-function renderCard(el) {
-  currentEl = el;
-  const color = getColor(el);
-  const catName = CAT_NAMES[el.cat] || el.cat;
+function renderCard(el){
+  currentEl=el;
+  const color=getColor(el);
+  const catName=CAT_NAMES[el.cat]||el.cat;
+  const barColor=color==='#C0DD97'?'#639922':color==='#FAC775'?'#BA7517':'#378ADD';
 
-  // 전자 껍질 바 HTML
-  const maxVal = Math.max(...el.e.map((c,i)=>MAX_SHELL[SHELLS[i]]||32));
-  const shellRows = el.e.map((cnt,i) => {
-    const pct = Math.round((cnt / (MAX_SHELL[SHELLS[i]] || 32)) * 100);
+  const shellRows=el.e.map((cnt,i)=>{
+    const max=MAX_SHELL[SHELLS[i]]||32;
+    const pct=Math.round((cnt/max)*100);
     return `<div class="shell-row">
       <div class="shell-lbl">${SHELLS[i]}</div>
-      <div class="shell-bar-bg"><div class="shell-bar" style="width:${pct}%;background:${color === '#C0DD97' ? '#639922' : color === '#FAC775' ? '#BA7517' : '#378ADD'}"></div></div>
+      <div class="shell-bar-bg"><div class="shell-bar" style="width:${pct}%;background:${barColor}"></div></div>
       <div class="shell-cnt">${cnt}e⁻</div>
     </div>`;
   }).join('');
 
-  const atomCanvas = drawAtomCanvas(el, 100);
+  const chipHTML=el.e.map((cnt,i)=>`<span class="e-chip">${SHELLS[i]}껍질: ${cnt}e⁻</span>`).join('');
+  const totalE=el.e.reduce((a,b)=>a+b,0);
 
-  const cardHTML = `
-  <div class="el-card" id="el-card">
+  const card=document.createElement('div');
+  card.className='el-card';
+  card.id='el-card';
+  card.innerHTML=`
     <div class="card-header" style="background:${color}">
       <div class="card-num">${el.num}</div>
       <div class="card-sym">${el.sym}</div>
-      <div class="card-info">
+      <div class="card-info-top">
         <div class="card-name">${el.name}</div>
-        <div class="card-cat">${catName} · ${el.period}주기 ${el.group}족</div>
-        <div class="card-mass">원자량 ${el.mass}</div>
+        <div class="card-cat-line">${catName} · ${el.period}주기 ${el.group}족</div>
+        <div class="card-mass-line">원자량 ${el.mass}</div>
       </div>
     </div>
     <div class="card-body">
+      <div class="stat-grid">
+        <div class="stat-box"><div class="stat-lbl">원자번호</div><div class="stat-val">${el.num}</div></div>
+        <div class="stat-box"><div class="stat-lbl">원자량</div><div class="stat-val">${el.mass}</div></div>
+        <div class="stat-box"><div class="stat-lbl">주기 / 족</div><div class="stat-val">${el.period}주기 / ${el.group}족</div></div>
+        <div class="stat-box"><div class="stat-lbl">분류</div><div class="stat-val">${catName}</div></div>
+      </div>
+      <div class="card-divider"></div>
       <div class="card-info-rows">
-        <div class="card-info-row">
-          <div class="ci-label">설명</div>
-          <div class="ci-val">${el.desc}</div>
-        </div>
-        <div class="card-info-row">
-          <div class="ci-label">용도</div>
-          <div class="ci-val">${el.uses}</div>
-        </div>
+        <div class="card-info-row"><div class="ci-label">설명</div><div class="ci-val">${el.desc}</div></div>
+        <div class="card-info-row"><div class="ci-label">용도</div><div class="ci-val">${el.uses}</div></div>
+        <div class="card-info-row"><div class="ci-label">발견</div><div class="ci-val">${el.disc}</div></div>
       </div>
       <div class="card-divider"></div>
       <div class="card-atom">
@@ -369,38 +310,41 @@ function renderCard(el) {
           <div id="canvas-slot"></div>
           <div class="card-shells">${shellRows}</div>
         </div>
+        <div class="e-chip-wrap">${chipHTML}</div>
+        <div class="e-total">총 전자 수: ${totalE}개</div>
       </div>
     </div>
     <div class="card-footer">
       <div class="footer-disc">발견: ${el.disc}</div>
       <div class="footer-badge" style="background:${color}">${catName}</div>
-    </div>
-  </div>`;
+    </div>`;
 
-  document.getElementById('preview-area').innerHTML = cardHTML;
-  document.getElementById('canvas-slot').appendChild(atomCanvas);
-  document.getElementById('btn-row').style.display = 'flex';
+  const pa=document.getElementById('preview-area');
+  pa.innerHTML='';
+  pa.appendChild(card);
+  document.getElementById('canvas-slot').appendChild(drawAtomCanvas(el,100));
+  document.getElementById('side-btns').style.display='flex';
 }
 
-function downloadCard() {
-  if (!currentEl) return;
-  const card = document.getElementById('el-card');
-  html2canvas(card, {scale:3, useCORS:true, backgroundColor:null}).then(canvas => {
-    const a = document.createElement('a');
-    a.download = `원소카드_${currentEl.sym}_${currentEl.name}.png`;
-    a.href = canvas.toDataURL('image/png');
+function downloadCard(){
+  if(!currentEl)return;
+  const card=document.getElementById('el-card');
+  html2canvas(card,{scale:3,useCORS:true,backgroundColor:'#ffffff'}).then(canvas=>{
+    const a=document.createElement('a');
+    a.download=`원소카드_${currentEl.sym}_${currentEl.name}.png`;
+    a.href=canvas.toDataURL('image/png');
     a.click();
   });
 }
 
-function copyCard() {
-  if (!currentEl) return;
-  const card = document.getElementById('el-card');
-  html2canvas(card, {scale:3, useCORS:true, backgroundColor:null}).then(canvas => {
-    canvas.toBlob(blob => {
-      navigator.clipboard.write([new ClipboardItem({'image/png': blob})])
-        .then(() => alert('클립보드에 복사되었습니다!'))
-        .catch(() => alert('복사 실패 — PNG로 저장을 이용해 주세요.'));
+function copyCard(){
+  if(!currentEl)return;
+  const card=document.getElementById('el-card');
+  html2canvas(card,{scale:3,useCORS:true,backgroundColor:'#ffffff'}).then(canvas=>{
+    canvas.toBlob(blob=>{
+      navigator.clipboard.write([new ClipboardItem({'image/png':blob})])
+        .then(()=>alert('클립보드에 복사되었습니다!'))
+        .catch(()=>alert('복사 실패 — PNG로 저장을 이용해 주세요.'));
     });
   });
 }
