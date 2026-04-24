@@ -606,7 +606,7 @@ body::before{
 <!-- ══ TITLE SCREEN ══ -->
 <div class="page" id="screen-title">
   <div class="title-badge">⚗️ Chemistry Quiz</div>
-  <div class="title-main">원소 조합<br><span>퍼즐</span> 🧪</div>
+  <div class="title-main">🧪 원소 조합 <span>퍼즐</span> 🧪</div>
   <div class="title-sub">화합물을 보고 구성 원소를 맞혀보세요!</div>
 
   <div class="rules-wrap">
@@ -933,7 +933,7 @@ function renderQuestion(){
   document.getElementById('q-name').textContent = q.name;
   document.getElementById('q-hint').textContent = '💡 '+q.hint;
   const cnt = q.answer.length;
-  document.getElementById('q-count').textContent = `✏️ 화학식을 구성하는 원소 ${cnt}개를 선택하세요`;
+  document.getElementById('q-count').textContent = `✏️ 이 화합물을 구성하는 원소 ${cnt}개를 선택하세요`;
 
   const fb = document.getElementById('feedback-bar');
   fb.style.display='none'; fb.className='feedback-bar';
