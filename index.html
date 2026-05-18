@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>원소 조합 퍼즐</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&family=Noto+Sans+KR:wght@700;800;900&subset=korean&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:       #fffbf0;
@@ -23,13 +23,11 @@
   --muted:    #a08060;
   --card-r:   18px;
 
-  /* 반응형 기준 토큰 (태블릿·PC 공통 기본) */
   --el-btn-min: 72px;
   --el-font-sym: 20px;
   --game-max: min(90vw, 640px);
 }
 
-/* ── 모바일 기준값 ── */
 @media (max-width: 599px){
   :root{
     --el-btn-min: 62px;
@@ -38,7 +36,6 @@
   }
 }
 
-/* ── 넓은 PC 기준값 ── */
 @media (min-width: 1200px){
   :root{
     --el-btn-min: 76px;
@@ -52,11 +49,10 @@ html,body{
   height:100%;
   background:var(--bg);
   color:var(--text);
-  font-family:'Noto Sans KR','Nunito',sans-serif;
+  font-family:'Noto Sans KR',sans-serif;
   overflow-x:hidden;
 }
 
-/* ── 배경 버블 ── */
 body::before{
   content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:
@@ -66,17 +62,15 @@ body::before{
     radial-gradient(circle 300px at 5%  85%,  rgba(59,130,246,0.10) 0%,transparent 70%);
 }
 
-/* ── 공통 ── */
 .page{
   position:relative;z-index:1;min-height:100vh;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:20px;
 }
 
-/* ── 플로팅 원소 ── */
 .float-els{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
 .float-el{
-  position:absolute;font-family:'Baloo 2',sans-serif;font-weight:800;
+  position:absolute;font-family:'Noto Sans KR',sans-serif;font-weight:900;
   line-height:1;user-select:none;animation:floatUp linear infinite;
 }
 @keyframes floatUp{
@@ -96,9 +90,8 @@ body::before{
   box-shadow:0 4px 16px rgba(255,107,53,0.3);
 }
 .title-main{
-  font-family:'Baloo 2',sans-serif;
-  font-size:clamp(40px,7vw,90px);font-weight:800;line-height:1.05;
-  color:var(--text);margin-bottom:8px;
+  font-size:clamp(40px,7vw,90px);font-weight:900;line-height:1.05;
+  color:var(--text);margin-bottom:8px;letter-spacing:-1px;
 }
 .title-main span{color:var(--accent)}
 .title-sub{
@@ -106,7 +99,6 @@ body::before{
   margin-bottom:36px;font-weight:700;
 }
 
-/* 규칙 카드 */
 .rules-wrap{
   display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
   margin-bottom:36px;max-width:700px;
@@ -130,7 +122,6 @@ body::before{
   .rule-desc{ font-size:13px; }
 }
 
-/* 시작 버튼 */
 .btn-start{
   display:inline-flex;align-items:center;gap:10px;
   background:linear-gradient(135deg,var(--accent),#ff8c42);
@@ -138,7 +129,7 @@ body::before{
   padding:16px 52px;border-radius:50px;border:none;cursor:pointer;
   box-shadow:0 6px 24px rgba(255,107,53,0.4);
   transition:transform 0.15s,box-shadow 0.15s;
-  font-family:'Nunito',sans-serif;
+  font-family:'Noto Sans KR',sans-serif;
 }
 .btn-start:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 10px 32px rgba(255,107,53,0.5)}
 .btn-start:active{transform:scale(0.98)}
@@ -147,7 +138,6 @@ body::before{
   .btn-start{ font-size:20px; padding:18px 64px; }
 }
 
-/* 리더보드 미리보기 */
 .lb-preview{
   background:var(--surface);border:2px solid var(--border);border-radius:var(--card-r);
   padding:18px 22px;width:100%;max-width:420px;margin-top:20px;
@@ -166,6 +156,16 @@ body::before{
 .lb-score{font-size:14px;font-weight:800;color:var(--accent)}
 .lb-time{font-size:11px;color:var(--muted);font-weight:700;margin-left:4px}
 
+
+.btn-hud-home{
+  display:flex;align-items:center;gap:5px;
+  background:var(--surface);border:2px solid var(--border);border-radius:10px;
+  padding:7px 14px;cursor:pointer;font-size:12px;font-weight:800;
+  color:var(--muted);font-family:'Noto Sans KR',sans-serif;
+  transition:all 0.15s;white-space:nowrap;
+}
+.btn-hud-home:hover{border-color:var(--accent);color:var(--accent);background:#fff3ec;}
+
 /* ════════════ NAME SCREEN ════════════ */
 #screen-name{text-align:center;gap:0}
 .name-bubble{
@@ -176,11 +176,11 @@ body::before{
   0%,100%{transform:rotate(-5deg)}
   50%{transform:rotate(5deg)}
 }
-.name-title{font-family:'Baloo 2',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:800;margin-bottom:6px}
+.name-title{font-size:clamp(24px,4vw,36px);font-weight:900;margin-bottom:6px;letter-spacing:-0.5px;}
 .name-sub{font-size:clamp(13px,1.8vw,16px);color:var(--muted);margin-bottom:28px;font-weight:700}
 .name-input{
   background:var(--surface);border:3px solid var(--border);border-radius:16px;
-  color:var(--text);font-size:18px;font-weight:700;font-family:'Nunito',sans-serif;
+  color:var(--text);font-size:18px;font-weight:700;font-family:'Noto Sans KR',sans-serif;
   padding:14px 22px;width:100%;max-width:380px;text-align:center;outline:none;
   transition:border-color 0.2s,box-shadow 0.2s;
   box-shadow:0 2px 12px rgba(0,0,0,0.06);
@@ -193,7 +193,7 @@ body::before{
   color:#fff;font-size:16px;font-weight:800;
   padding:14px 44px;border-radius:50px;border:none;cursor:pointer;
   box-shadow:0 6px 20px rgba(255,107,53,0.35);
-  transition:transform 0.15s,box-shadow 0.15s;font-family:'Nunito',sans-serif;
+  transition:transform 0.15s,box-shadow 0.15s;font-family:'Noto Sans KR',sans-serif;
 }
 .btn-name:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,107,53,0.45)}
 
@@ -211,25 +211,20 @@ body::before{
 /* HUD */
 .hud{
   display:flex;align-items:center;justify-content:space-between;
-  width:100%;padding:10px 16px;
+  width:100%;
   background:var(--surface);border:2px solid var(--border);border-radius:var(--card-r);
   margin-bottom:8px;
   box-shadow:0 3px 14px rgba(0,0,0,0.06);
+  padding:16px 28px;
 }
 .hud-item{display:flex;flex-direction:column;align-items:center;gap:2px}
-.hud-label{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
-.hud-val{font-size:18px;font-weight:900;font-family:'Baloo 2',sans-serif}
+.hud-label{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.hud-val{font-size:24px;font-weight:900;}
 .hud-val.accent{color:var(--accent)}
 .hud-val.green{color:var(--green)}
 .hud-val.yellow{color:#d97706}
 .hud-val.blue{color:var(--blue)}
 
-/* HUD: 태블릿·PC 기본 */
-.hud{ padding:16px 28px; }
-.hud-label{ font-size:11px; }
-.hud-val{ font-size:24px; }
-
-/* HUD: 모바일만 축소 */
 @media (max-width:599px){
   .hud{ padding:12px 18px; }
   .hud-label{ font-size:10px; }
@@ -272,8 +267,7 @@ body::before{
   letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;
 }
 .q-formula{
-  font-family:'Baloo 2',sans-serif;
-  font-size:clamp(48px,8vw,80px);font-weight:800;
+  font-size:clamp(48px,8vw,80px);font-weight:900;
   color:var(--text);margin-bottom:6px;letter-spacing:1px;line-height:1.1;
 }
 .q-formula sub{font-size:0.55em;vertical-align:sub}
@@ -284,7 +278,6 @@ body::before{
   padding:5px 12px;
 }
 .q-name{
-  font-family:'Noto Sans KR',sans-serif;
   font-size:clamp(12px,2vw,14px);font-weight:700;
   color:#92661a;margin-bottom:0;white-space:nowrap;
 }
@@ -294,7 +287,6 @@ body::before{
   margin-bottom:0;
   border-left:1.5px solid #fde68a;padding-left:8px;white-space:nowrap;
 }
-/* 원소 수 안내 배지 */
 .q-count{
   display:inline-flex;align-items:center;gap:6px;
   background:linear-gradient(135deg,var(--accent),#ff8c42);
@@ -333,10 +325,11 @@ body::before{
 
 .el-btn{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:var(--surface);border:2px solid var(--border);border-radius:12px;
-  padding:9px 4px 7px;cursor:pointer;min-height:54px;
+  background:var(--surface);border:2px solid var(--border);
+  padding:14px 6px 12px;cursor:pointer;
   transition:all 0.15s;position:relative;user-select:none;
   box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  border-radius:14px;
 }
 .el-btn:hover{
   border-color:var(--accent2);
@@ -364,35 +357,25 @@ body::before{
   background:#fffbeb!important;
 }
 .el-btn .num{
-  font-family:'Noto Sans KR',sans-serif;
   font-size:11px;color:var(--accent);font-weight:700;
   line-height:1;margin-bottom:4px;
 }
 .el-btn .sym{
-  font-family:'Baloo 2',sans-serif;
-  font-size:var(--el-font-sym);font-weight:800;color:var(--text);line-height:1;
+  font-size:var(--el-font-sym);font-weight:900;color:var(--text);line-height:1;
 }
 .el-btn .name-kr{
-  font-family:'Noto Sans KR',sans-serif !important;
   font-size:15px;color:var(--text);font-weight:900;
   margin-top:4px;overflow:hidden;text-overflow:ellipsis;
   white-space:nowrap;width:100%;text-align:center;line-height:1.2;
 }
 .el-btn .check{
   position:absolute;top:4px;right:4px;
-  width:14px;height:14px;background:var(--accent);border-radius:50%;
+  width:16px;height:16px;background:var(--accent);border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-size:8px;color:#fff;opacity:0;transition:opacity 0.15s;
+  font-size:9px;color:#fff;opacity:0;transition:opacity 0.15s;
 }
 .el-btn.selected .check{opacity:1}
 
-/* 원소 버튼: 태블릿·PC 기본 */
-.el-btn{ border-radius:14px; padding:14px 6px 12px; }
-.el-btn .num{ font-size:11px; }
-.el-btn .name-kr{ font-size:15px; }
-.el-btn .check{ width:16px; height:16px; font-size:9px; }
-
-/* 원소 버튼: 모바일 축소 */
 @media (max-width:599px){
   .el-btn{ border-radius:12px; padding:12px 4px 10px; }
   .el-btn .num{ font-size:10px; }
@@ -400,7 +383,6 @@ body::before{
   .el-btn .check{ width:14px; height:14px; font-size:8px; }
 }
 
-/* 원소 버튼: 넓은 PC */
 @media (min-width:1200px){
   .el-btn{ border-radius:16px; padding:16px 8px 14px; }
   .el-btn .num{ font-size:12px; }
@@ -424,7 +406,7 @@ body::before{
 .answer-chip{
   display:flex;align-items:center;gap:5px;
   background:#fff;border:2px solid var(--accent);border-radius:10px;
-  padding:5px 10px;font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700;
+  padding:5px 10px;font-size:14px;font-weight:700;
   cursor:pointer;transition:all 0.15s;color:var(--text);
   box-shadow:0 2px 8px rgba(255,107,53,0.15);
 }
@@ -434,7 +416,7 @@ body::before{
 /* 제출 버튼 */
 .btn-submit{
   width:100%;padding:13px;border-radius:16px;border:none;cursor:pointer;
-  font-size:16px;font-weight:800;font-family:'Nunito',sans-serif;
+  font-size:16px;font-weight:800;font-family:'Noto Sans KR',sans-serif;
   background:linear-gradient(135deg,var(--accent),#ff8c42);
   color:#fff;
   box-shadow:0 5px 20px rgba(255,107,53,0.35);
@@ -465,17 +447,17 @@ body::before{
 /* ════════════ RESULT SCREEN ════════════ */
 #screen-result{text-align:center;gap:0;max-width:800px;width:100%}
 
-.confetti-wrap{position:relative;display:inline-block;margin-bottom:8px}
 .result-badge{
   font-size:96px;display:block;
   animation:popIn 0.6s cubic-bezier(0.34,1.56,0.64,1);
+  margin-bottom:8px;
 }
 @media (max-width:599px){ .result-badge{ font-size:72px; } }
 @keyframes popIn{from{transform:scale(0) rotate(-20deg);opacity:0}to{transform:scale(1) rotate(0deg);opacity:1}}
 
 .result-title{
-  font-family:'Baloo 2',sans-serif;font-size:clamp(28px,5vw,44px);font-weight:800;
-  color:var(--text);margin-bottom:4px;
+  font-size:clamp(28px,5vw,44px);font-weight:900;
+  color:var(--text);margin-bottom:4px;letter-spacing:-0.5px;
 }
 .result-name{font-size:clamp(14px,2vw,18px);color:var(--muted);margin-bottom:24px;font-weight:700}
 
@@ -491,7 +473,7 @@ body::before{
 }
 @media (max-width:599px){ .rs-card{ padding:14px 8px; border-radius:14px; } }
 .rs-label{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
-.rs-val{font-family:'Baloo 2',sans-serif;font-size:clamp(22px,4vw,32px);font-weight:800}
+.rs-val{font-size:clamp(22px,4vw,32px);font-weight:900;}
 .rs-val.green{color:var(--green)}
 .rs-val.yellow{color:#d97706}
 .rs-val.accent{color:var(--accent)}
@@ -508,7 +490,7 @@ body::before{
   box-shadow:0 2px 10px rgba(0,0,0,0.05);
 }
 .ri-formula{
-  font-family:'Baloo 2',sans-serif;font-size:clamp(15px,2.5vw,20px);font-weight:800;
+  font-size:clamp(15px,2.5vw,20px);font-weight:900;
   color:var(--accent);margin-bottom:2px;
 }
 .ri-name{font-size:clamp(12px,1.8vw,15px);color:var(--text);font-weight:700;margin-bottom:4px}
@@ -526,17 +508,17 @@ body::before{
 }
 .lb-table{
   width:100%;border-collapse:collapse;
-  background:var(--surface);border-radius:14px;overflow:hidden;
+  background:var(--surface);border-radius:18px;overflow:hidden;
   border:2px solid var(--border);
   box-shadow:0 3px 14px rgba(0,0,0,0.06);
 }
 .lb-table th{
-  font-size:10px;font-weight:800;color:var(--muted);letter-spacing:1px;
-  text-transform:uppercase;padding:11px 14px;text-align:left;
+  font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px;
+  text-transform:uppercase;padding:14px 18px;text-align:left;
   border-bottom:2px solid var(--border);background:#fdf6e3;
 }
 .lb-table td{
-  padding:11px 14px;font-size:clamp(12px,1.5vw,14px);font-weight:700;
+  padding:14px 18px;font-size:clamp(12px,1.5vw,14px);font-weight:700;
   border-bottom:1px solid var(--border);color:var(--text);
 }
 .lb-table tr:last-child td{border-bottom:none}
@@ -550,15 +532,12 @@ body::before{
   .lb-table td{ padding:11px 14px; }
   .lb-table{ border-radius:14px; }
 }
-.lb-table th{ font-size:11px; padding:14px 18px; }
-.lb-table td{ padding:14px 18px; }
-.lb-table{ border-radius:18px; }
 
 /* 버튼 그룹 */
 .btn-group{display:flex;gap:10px;width:100%}
 .btn-retry{
   flex:1;padding:18px;border-radius:16px;cursor:pointer;
-  font-size:17px;font-weight:800;font-family:'Nunito',sans-serif;
+  font-size:17px;font-weight:800;font-family:'Noto Sans KR',sans-serif;
   background:var(--surface);color:var(--text);
   border:2px solid var(--border);transition:all 0.15s;
   box-shadow:0 2px 10px rgba(0,0,0,0.05);
@@ -570,7 +549,7 @@ body::before{
 }
 .btn-home{
   flex:1;padding:18px;border-radius:16px;cursor:pointer;
-  font-size:17px;font-weight:800;font-family:'Nunito',sans-serif;
+  font-size:17px;font-weight:800;font-family:'Noto Sans KR',sans-serif;
   background:linear-gradient(135deg,var(--accent),#ff8c42);
   color:#fff;border:none;
   box-shadow:0 4px 16px rgba(255,107,53,0.35);
@@ -583,7 +562,6 @@ body::before{
 
 .hidden{display:none!important}
 
-/* ── 폭죽 파티클 ── */
 .particle{
   position:fixed;pointer-events:none;z-index:999;
   border-radius:50%;animation:burst 0.8s ease-out forwards;
@@ -593,18 +571,35 @@ body::before{
   100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}
 }
 
-/* ── 2컬럼 레이아웃 내 라벨 재배치 헬퍼 ── */
 .ans-label{ margin-bottom:10px; }
 @media (min-width:768px){ .ans-label{ margin-top:4px; } }
+
+/* ── 탐험맵 돌아가기 버튼 ── */
+.map-btn-wrap{position:absolute;top:20px;left:20px;z-index:10;}
+.map-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  color:#5c7a2e;font-size:13px;font-weight:700;text-decoration:none;
+  border:2px solid #b5d97a;border-radius:24px;
+  padding:8px 18px;background:#f0fde0;
+  transition:all .2s;box-shadow:0 2px 8px rgba(100,160,50,.15);
+  font-family:'Noto Sans KR',sans-serif;
+}
+.map-btn::before{content:"←";font-size:14px;}
+.map-btn:hover{background:#d4f5a0;border-color:#8ac840;transform:translateX(-2px);}
+@media(max-width:599px){
+  .map-btn{font-size:11px;padding:6px 12px;}
+  .map-btn-wrap{top:12px;left:12px;}
+}
 </style>
 </head>
 <body>
 
-<!-- 플로팅 원소 배경 -->
 <div class="float-els" id="float-els"></div>
 
 <!-- ══ TITLE SCREEN ══ -->
 <div class="page" id="screen-title">
+  <div class="map-btn-wrap"><a class="map-btn" href="https://lm99015-cyber.github.io/game_level/">원소 게임 탐험맵으로</a></div>
+
   <div class="title-badge">⚗️ Chemistry Quiz</div>
   <div class="title-main">⚗️ 원소 조합 <span>퍼즐</span> 🧪</div>
   <div class="title-sub">화합물을 보고 구성 원소를 맞혀보세요!</div>
@@ -655,7 +650,6 @@ body::before{
 
 <!-- ══ GAME SCREEN ══ -->
 <div class="page hidden" id="screen-game">
-  <!-- HUD -->
   <div class="hud">
     <div class="hud-item">
       <div class="hud-label">문제</div>
@@ -673,10 +667,11 @@ body::before{
       <div class="hud-label">연속</div>
       <div class="hud-val accent" id="hud-streak">🔥 0</div>
     </div>
+    <button class="btn-hud-home" onclick="stopTimer();goName()">← 처음으로</button>
+    <button class="btn-hud-home" onclick="window.location.href='https://lm99015-cyber.github.io/game_level/'">🗺️ 탐험맵</button>
   </div>
   <div class="progress-wrap"><div class="progress-bar" id="progress-bar" style="width:10%"></div></div>
 
-  <!-- 문제 카드 -->
   <div class="question-card">
     <div class="q-count" id="q-count"></div>
     <div class="q-formula" id="q-formula"></div>
@@ -686,10 +681,8 @@ body::before{
     </div>
   </div>
 
-  <!-- 피드백 -->
   <div class="feedback-bar" id="feedback-bar"></div>
 
-  <!-- 내 답 -->
   <div class="elements-label ans-label">선택한 원소</div>
   <div class="answer-wrap" id="answer-wrap">
     <div class="answer-empty" id="answer-empty">원소를 클릭해서 선택하세요</div>
@@ -697,7 +690,6 @@ body::before{
 
   <button class="btn-submit" id="btn-submit" onclick="submitAnswer()">정답 제출</button>
 
-  <!-- 원소 버튼 -->
   <div class="elements-label el-label">원소 선택 (1–20번)</div>
   <div class="elements-grid" id="elements-grid"></div>
 </div>
@@ -723,10 +715,8 @@ body::before{
     </div>
   </div>
 
-  <!-- 오답 리뷰 -->
   <div class="review-wrap" id="review-wrap"></div>
 
-  <!-- 리더보드 -->
   <div class="lb-wrap">
     <div class="lb-header">
       <div class="lb-title">🏆 리더보드</div>
@@ -739,7 +729,7 @@ body::before{
 
   <div class="btn-group">
     <button class="btn-retry" onclick="retryGame()">🔄 다시 도전</button>
-    <button class="btn-home" onclick="goHome()">🏠 홈으로</button>
+    <button class="btn-home" onclick="goHome()">원소 게임 탐험맵으로</button>
   </div>
 </div>
 
@@ -852,7 +842,7 @@ function showScreen(id){
   });
 }
 function goName(){ showScreen('screen-name'); setTimeout(()=>document.getElementById('name-input').focus(),100); }
-function goHome(){ renderLbPreview(); showScreen('screen-title'); }
+function goHome(){window.location.href='https://lm99015-cyber.github.io/game_level/';}
 document.getElementById('name-input').addEventListener('keydown', e=>{ if(e.key==='Enter') startGame(); });
 
 /* ── 리더보드 ── */
@@ -947,6 +937,7 @@ function renderQuestion(){
     btn.innerHTML = `
       <div class="check">✓</div>
       <div class="num">${el.num}</div>
+      <div class="sym">${el.sym}</div>
       <div class="name-kr">${el.name}</div>`;
     btn.addEventListener('click', ()=>toggleElement(el.sym, btn));
     grid.appendChild(btn);
