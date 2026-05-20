@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>원소 조합 게임</title>
+<title>원소 조합 퍼즐</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -25,7 +25,7 @@
 
   --el-btn-min: 72px;
   --el-font-sym: 20px;
-  --game-max: min(90vw, 700px);
+  --game-max: min(98vw, 1200px);
 }
 
 
@@ -39,10 +39,10 @@
   .q-name{ font-size:15px; }
   .q-hint{ font-size:13px; }
   .q-count{ font-size:14px; padding:8px 20px; }
-  .el-btn{ padding:16px 6px 14px; border-radius:16px; }
+  .el-btn{ padding:10px 4px; border-radius:16px; aspect-ratio:1/1; }
   .el-btn .num{ font-size:12px; }
   .el-btn .sym{ font-size:22px; }
-  .el-btn .name-kr{ font-size:15px; }
+  .el-btn .name-kr{ font-size:13px; }
   .elements-grid{ gap:9px; }
   .answer-wrap{ min-height:52px; padding:10px 18px; }
   .answer-chip{ font-size:15px; padding:6px 12px; }
@@ -66,7 +66,7 @@
   :root{
     --el-btn-min: 76px;
     --el-font-sym: 21px;
-    --game-max: min(90vw, 740px);
+    --game-max: min(98vw, 1400px);
   }
 }
 
@@ -186,7 +186,9 @@ body::before{
 .btn-hud-home{
   display:flex;align-items:center;gap:5px;
   background:var(--surface);border:2px solid var(--border);border-radius:10px;
-  padding:7px 14px;cursor:pointer;font-size:12px;font-weight:800;
+  padding:clamp(6px,0.8vw,12px) clamp(10px,1.2vw,22px);
+  cursor:pointer;
+  font-size:clamp(11px,1.1vw,16px);font-weight:800;
   color:var(--muted);font-family:'Noto Sans KR',sans-serif;
   transition:all 0.15s;white-space:nowrap;
 }
@@ -317,10 +319,11 @@ body::before{
   display:inline-flex;align-items:center;gap:6px;
   background:linear-gradient(135deg,var(--accent),#ff8c42);
   color:#fff;font-size:12px;font-weight:800;
-  padding:6px 16px;border-radius:30px;
+  padding:6px 16px;border-radius:16px;
   font-family:'Noto Sans KR',sans-serif;
   box-shadow:0 3px 12px rgba(255,107,53,0.3);
   margin-bottom:10px;
+  text-align:center;line-height:1.5;
 }
 
 @media (min-width:768px){
@@ -352,21 +355,23 @@ body::before{
 .el-btn{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   background:var(--surface);border:2px solid var(--border);
-  padding:14px 6px 12px;cursor:pointer;
+  padding:10px 4px;cursor:pointer;
   transition:all 0.15s;position:relative;user-select:none;
   box-shadow:0 2px 8px rgba(0,0,0,0.05);
   border-radius:14px;
+  aspect-ratio:1/1;
 }
 .el-btn:hover{
-  border-color:var(--accent2);
+  border-color:var(--accent2);border-width:2.5px;
   background:#fffbf0;
-  transform:translateY(-2px);
-  box-shadow:0 4px 14px rgba(255,193,7,0.25);
+  transform:none;
+  box-shadow:none;
 }
 .el-btn.selected{
-  border-color:var(--accent);background:#fff3ec;
-  transform:translateY(-2px) scale(1.05);
-  box-shadow:0 5px 16px rgba(255,107,53,0.3);
+  border-color:var(--accent);border-width:3px;
+  background:#fff3ec;
+  transform:none;
+  box-shadow:none;
 }
 .el-btn.correct{
   border-color:var(--green)!important;
@@ -383,24 +388,33 @@ body::before{
   background:#fffbeb!important;
 }
 .el-btn .num{
-  font-size:11px;color:var(--accent);font-weight:700;
-  line-height:1;margin-bottom:4px;
+  font-size:12px;color:var(--accent);font-weight:700;
+  line-height:1;margin-bottom:3px;
+}
+
+}
+
+}
+
 }
 .el-btn .sym{
-  font-size:var(--el-font-sym);font-weight:900;color:var(--text);line-height:1;
+  font-size:clamp(14px,2.2vw,20px);font-weight:900;color:var(--text);line-height:1;
 }
 .el-btn .name-kr{
-  font-size:15px;color:var(--text);font-weight:900;
+  font-size:16px;color:var(--text);font-weight:900;
   margin-top:4px;overflow:hidden;text-overflow:ellipsis;
   white-space:nowrap;width:100%;text-align:center;line-height:1.2;
+  letter-spacing:-0.04em;
 }
-.el-btn .check{
-  position:absolute;top:4px;right:4px;
-  width:16px;height:16px;background:var(--accent);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:9px;color:#fff;opacity:0;transition:opacity 0.15s;
+
 }
-.el-btn.selected .check{opacity:1}
+
+}
+
+}
+
+.el-btn.selected .num{color:var(--accent)}
+.el-btn.selected .name-kr{color:var(--accent)}
 
 @media (max-width:599px){
   .el-btn{ border-radius:12px; padding:12px 4px 10px; }
@@ -471,7 +485,7 @@ body::before{
 @media (max-width:599px){ .feedback-bar{ font-size:13px; padding:9px 12px; } }
 
 /* ════════════ RESULT SCREEN ════════════ */
-#screen-result{text-align:center;gap:0;max-width:800px;width:100%}
+#screen-result{text-align:center;gap:0;max-width:800px;width:100%;margin:0 auto;}
 
 .result-badge{
   font-size:96px;display:block;
@@ -616,6 +630,51 @@ body::before{
   .map-btn{font-size:11px;padding:6px 12px;}
   .map-btn-wrap{top:12px;left:12px;}
 }
+
+/* ── 2열 레이아웃 ── */
+.game-layout{
+  display:flex;gap:16px;width:100%;flex:1;
+  align-items:flex-start;
+}
+.game-left{
+  flex:1.4;display:flex;flex-direction:column;gap:8px;min-width:0;
+}
+.game-right{
+  flex:1;display:flex;flex-direction:column;gap:10px;min-width:0;
+  position:sticky;top:10px;
+}
+/* 모바일: 세로 유지 */
+@media(max-width:767px){
+  .game-layout{flex-direction:column;}
+  .game-right{position:static;}
+}
+
+/* ── 2열 게임 레이아웃 ── */
+.game-layout{
+  display:flex;gap:16px;width:100%;
+  align-items:flex-start;flex:1;
+}
+.game-left{
+  flex:1;display:flex;flex-direction:column;gap:8px;min-width:0;
+}
+.game-right{
+  flex:1.4;display:flex;flex-direction:column;gap:8px;min-width:0;
+}
+@media(max-width:767px){
+  .game-layout{flex-direction:column;}
+  .game-right{position:static;}
+}
+
+.check-badge{
+  position:absolute;top:6px;right:6px;
+  width:22px;height:22px;
+  background:var(--accent);border-radius:50%;
+  font-size:13px;color:#fff;font-weight:800;
+  line-height:22px;text-align:center;
+  box-shadow:0 2px 8px rgba(255,107,53,0.4);
+  pointer-events:none;
+}
+#screen-result.page{align-items:center;justify-content:center;}
 </style>
 </head>
 <body>
@@ -627,14 +686,14 @@ body::before{
   <div class="map-btn-wrap"><a class="map-btn" href="https://lm99015-cyber.github.io/game_level/">원소 게임 탐험맵으로</a></div>
 
   <div class="title-badge">⚗️ Chemistry Quiz</div>
-  <div class="title-main">⚗️ 원소 <span>조합</span> 🧪</div>
-  <div class="title-sub">화합식을 보고 구성 원소를 맞혀보세요!</div>
+  <div class="title-main">⚗️ 원소 조합 <span>퍼즐</span> 🧪</div>
+  <div class="title-sub">화합물을 보고 구성 원소를 맞혀보세요!</div>
 
   <div class="rules-wrap">
     <div class="rule-card">
       <div class="rule-icon">🎯</div>
       <div class="rule-title">10문항</div>
-      <div class="rule-desc">랜덤 화합식에서 원소를 골라내세요</div>
+      <div class="rule-desc">랜덤 화합물에서 원소를 골라내세요</div>
     </div>
     <div class="rule-card">
       <div class="rule-icon">⏱️</div>
@@ -693,31 +752,39 @@ body::before{
       <div class="hud-label">연속</div>
       <div class="hud-val accent" id="hud-streak">🔥 0</div>
     </div>
-    <button class="btn-hud-home" onclick="stopTimer();goName()">← 처음으로</button>
-    <button class="btn-hud-home" onclick="window.location.href='https://lm99015-cyber.github.io/game_level/'">🗺️ 탐험맵</button>
+    <div style="display:flex;gap:6px;">
+      <button class="btn-hud-home" onclick="stopTimer();goName()">← 처음으로</button>
+      <button class="btn-hud-home" onclick="window.location.href='https://lm99015-cyber.github.io/game_level/'">🗺️ 게임탐험맵</button>
+    </div>
   </div>
   <div class="progress-wrap"><div class="progress-bar" id="progress-bar" style="width:10%"></div></div>
 
-  <div class="question-card">
-    <div class="q-count" id="q-count"></div>
-    <div class="q-formula" id="q-formula"></div>
-    <div class="q-name-row">
-      <div class="q-name" id="q-name"></div>
-      <div class="q-hint" id="q-hint"></div>
+  <!-- 2열 레이아웃 -->
+  <div class="game-layout">
+
+    <!-- 왼쪽: 문제카드 + 피드백 + 선택원소 + 제출버튼 -->
+    <div class="game-left">
+      <div class="question-card">
+        <div class="q-count" id="q-count"></div>
+        <div class="q-formula" id="q-formula"></div>
+        <div class="q-name-row">
+          <div class="q-name" id="q-name"></div>
+          <div class="q-hint" id="q-hint"></div>
+        </div>
+      </div>
+      <div class="feedback-bar" id="feedback-bar"></div>
+      <div class="answer-wrap" id="answer-wrap">
+        <div class="answer-empty" id="answer-empty">원소를 클릭해서 선택하세요</div>
+      </div>
+      <button class="btn-submit" id="btn-submit" onclick="submitAnswer()">정답 제출</button>
     </div>
-  </div>
 
-  <div class="feedback-bar" id="feedback-bar"></div>
+    <!-- 오른쪽: 원소 선택 그리드 -->
+    <div class="game-right">
+      <div class="elements-grid" id="elements-grid"></div>
+    </div>
 
-  <div class="elements-label ans-label">선택한 원소</div>
-  <div class="answer-wrap" id="answer-wrap">
-    <div class="answer-empty" id="answer-empty">원소를 클릭해서 선택하세요</div>
-  </div>
-
-  <button class="btn-submit" id="btn-submit" onclick="submitAnswer()">정답 제출</button>
-
-  <div class="elements-label el-label">원소 선택 (1–20번)</div>
-  <div class="elements-grid" id="elements-grid"></div>
+  </div><!-- /game-layout -->
 </div>
 
 <!-- ══ RESULT SCREEN ══ -->
@@ -949,7 +1016,7 @@ function renderQuestion(){
   document.getElementById('q-name').textContent = q.name;
   document.getElementById('q-hint').textContent = '💡 '+q.hint;
   const cnt = q.answer.length;
-  document.getElementById('q-count').textContent = `✏️ 이 화합식을 구성하는 원소 ${cnt}개를 선택하세요`;
+  document.getElementById('q-count').textContent = `🔬 이 화합물을 구성하는 원소 ${cnt}개를 선택하세요`;
 
   const fb = document.getElementById('feedback-bar');
   fb.style.display='none'; fb.className='feedback-bar';
@@ -961,9 +1028,7 @@ function renderQuestion(){
     btn.className = 'el-btn';
     btn.dataset.sym = el.sym;
     btn.innerHTML = `
-      <div class="check">✓</div>
       <div class="num">${el.num}</div>
-      <div class="sym">${el.sym}</div>
       <div class="name-kr">${el.name}</div>`;
     btn.addEventListener('click', ()=>toggleElement(el.sym, btn));
     grid.appendChild(btn);
@@ -971,13 +1036,35 @@ function renderQuestion(){
 
   renderAnswerWrap();
   document.getElementById('btn-submit').disabled = false;
+
+  // 버튼 실제 크기 기준으로 폰트 동적 설정
+  requestAnimationFrame(() => {
+    const btn = document.querySelector('.el-btn');
+    if (!btn) return;
+    const w = btn.offsetWidth;
+    const numFS   = Math.max(10, Math.round(w * 0.12));
+    const nameFS  = Math.max(12, Math.round(w * 0.18));
+    document.querySelectorAll('.el-btn .num').forEach(el => el.style.fontSize = numFS + 'px');
+    document.querySelectorAll('.el-btn .name-kr').forEach(el => el.style.fontSize = nameFS + 'px');
+  });
 }
 
 function toggleElement(sym, btn){
   if(btn.classList.contains('correct')||btn.classList.contains('wrong')||btn.classList.contains('missed')) return;
   const idx = selected.indexOf(sym);
-  if(idx===-1){ selected.push(sym); btn.classList.add('selected'); }
-  else { selected.splice(idx,1); btn.classList.remove('selected'); }
+  if(idx===-1){
+    selected.push(sym);
+    btn.classList.add('selected');
+    const ck = document.createElement('span');
+    ck.className = 'check-badge';
+    ck.textContent = '✓';
+    btn.appendChild(ck);
+  } else {
+    selected.splice(idx,1);
+    btn.classList.remove('selected');
+    const ck = btn.querySelector('.check-badge');
+    if(ck) ck.remove();
+  }
   renderAnswerWrap();
 }
 
@@ -1093,6 +1180,17 @@ function endGame(){
 }
 
 renderLbPreview();
+
+// 창 크기 변경 시 버튼 폰트 재적용
+window.addEventListener('resize', () => {
+  requestAnimationFrame(() => {
+    const btn = document.querySelector('.el-btn');
+    if (!btn) return;
+    const w = btn.offsetWidth;
+    document.querySelectorAll('.el-btn .num').forEach(el => el.style.fontSize = Math.max(10, Math.round(w * 0.12)) + 'px');
+    document.querySelectorAll('.el-btn .name-kr').forEach(el => el.style.fontSize = Math.max(12, Math.round(w * 0.18)) + 'px');
+  });
+});
 </script>
 </body>
 </html>
